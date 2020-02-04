@@ -6,66 +6,11 @@
 #include <Winioctl.h>
 #include <wchar.h>
 #include <algorithm>
+#include "FSReader.h"
 
 using namespace std;
 
 
-
-int Offsets[] = { 0x00,0x03, 0x0B,0x0D, 0x0E ,0x10,0x13,0x15,0x16,0x18,0x1A,0x1C,0x20,0x24,0x28,0x30,0x38,0x40,0x44,0x45,0x48,0x50,0x54,0x01FE};
-
-#pragma pack(1)
-typedef struct _BIOS_PARAM_BLOCK
-{
-    BYTE jumpCode[3];
-    BYTE oemID[8];
-    //BYTE bytesPerSector[2];
-    WORD bytesPerSector;
-    BYTE sectorPerCluster;
-    WORD reservedSectors;
-    BYTE always0[3];
-    WORD notUsed;
-    BYTE mediaDiscr;
-    WORD always02;
-    WORD sectorperTrack;
-    WORD numOfHeaders;
-    DWORD hiddenSectors;
-    DWORD notUsed2;
-    DWORD notused3;
-    LONGLONG totalSectors;
-    LONGLONG lcnForSMFT;
-    LONGLONG lcnForSMFTMirr;
-    DWORD clusterPerFileRecordSegm;
-    BYTE clusterPerIndexBuff;
-    BYTE notUsed4[3];
-    LONGLONG volumeSerialNumber;
-    DWORD checksum;
-    BYTE bootstrap[426];
-    WORD endMarker;
-} BPB;
-#pragma pack()
-
-void PrintBootSectInfo(BPB _bpb) {
-    printf("NTFS Disk Information: \n");
-    printf("===========================\n");
-    printf("Assembly Instruction to jump to Boot code: 0x%X\n",
-        _bpb.jumpCode);
-    printf("OEM Name: %s\n", _bpb.oemID);
-    printf("Bytes per sector: %d\n", _bpb.bytesPerSector);
-    printf("Sector per cluster: %d\n", _bpb.sectorPerCluster);
-    printf("Reserved Sectors: %d\n", _bpb.reservedSectors);
-    printf("Media Descriptor: 0x%X\n", _bpb.mediaDiscr);
-    printf("Sectors Per Track: %d\n",_bpb.sectorperTrack);
-    printf("Number Of Heads: %d\n", _bpb.numOfHeaders);
-    printf("Hidden Sectors: %d\n", _bpb.hiddenSectors);
-    printf("Total Sectors: %dl\n",_bpb.totalSectors);
-    printf("Logical Cluster Number for the file $MFT: %dl\n", _bpb.lcnForSMFT);
-    printf("Logical Cluster Number for the file $MFTMirr: %dl\n",_bpb.lcnForSMFTMirr);
-    printf("Clusters Per File Record Segment: %d\n", _bpb.clusterPerFileRecordSegm);
-    printf("Clusters Per Index Buffer: %d\n", _bpb.clusterPerIndexBuff);
-    printf("Volume Serial Number: %d\n", _bpb.volumeSerialNumber);
-    printf("Checksum: %d\n", _bpb.checksum);
-    printf("End of Sector Marker: 0x%X\n", _bpb.endMarker);
-}
 
 int main()
 {
@@ -85,7 +30,7 @@ int main()
         NULL, OPEN_EXISTING, 0, NULL);
     if (hDisk == INVALID_HANDLE_VALUE)
     {
-        wprintf(L"CreateFile() failed!\n");
+        wprintf(L"CreateFile() failed! Proboly run as administrator\n");
         wprintf(L" %u \n", GetLastError());
         if (CloseHandle(hDisk) != 0)
             wprintf(L"hVolume handle was closed successfully!\n");
@@ -126,5 +71,7 @@ int main()
         memcpy(&_bpb, bBootSector, 512);
         
         PrintBootSectInfo(_bpb);
+        cout << "Press any key to exit";
+        getchar();
     }
 }
