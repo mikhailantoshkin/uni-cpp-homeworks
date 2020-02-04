@@ -19,14 +19,10 @@ int main()
     BYTE bBootSector[512];
     memset(bBootSector, 0, 512);
     DWORD dwBytesRead(0);
-    BPB _bpb;
+    //BPB _bpb;
     string diskName;
        
-    char NameBuffer[MAX_PATH];
-    char SysNameBuffer[MAX_PATH];
-    DWORD VSNumber;
-    DWORD MCLength;
-    DWORD FileSF;
+
     
     // TODO: validation
     while (1){
@@ -39,24 +35,15 @@ int main()
 
     
     string diskNameFormated = "\\\\.\\" + diskName + ":";
-    string forVolumeInf = diskName + ":\\";
+
     
-
-    if (GetVolumeInformationA(forVolumeInf.c_str(), NameBuffer, sizeof(NameBuffer),
-        &VSNumber, &MCLength, &FileSF, SysNameBuffer, sizeof(SysNameBuffer)))
-    {
-        cout << "Detected file system is " << SysNameBuffer << endl;
-    }
-    string SysName = SysNameBuffer;
-
-    if (SysName.find("NTFS") == string::npos) {
-        cout << "Sorry, but "<< SysName << " is not supported yet!" << endl;
-        cout << "Press any key to exit" << endl;
-        //needs to be called twice for some reason
-        cin.get();
-        cin.get();
+    string SysName = FindFSName(diskName);
+    if (SysName.find("NTFS") == std::string::npos) {
+        cout << "Sorry, " << SysName << " is not supported yet!" << endl;
+        getchar();
         exit(0);
     }
+
 
     HANDLE hDisk = CreateFileA(diskNameFormated.c_str(),
         GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
@@ -81,9 +68,11 @@ int main()
     else
     {
         CloseHandle(hDisk);
-        memcpy(&_bpb, bBootSector, 512);
-        PrintBootSectInfo(_bpb);
+        //memcpy(&_bpb, bBootSector, 512);
+        NTFS_BootRecord *_bpb = reinterpret_cast<NTFS_BootRecord*>(bBootSector);
+        PrintBootSectInfo(*_bpb);
         cout << "Press Enter to exit";
-        getchar();
+        cin.get();
+        exit(0);
     }
 }
