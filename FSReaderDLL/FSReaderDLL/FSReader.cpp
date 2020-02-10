@@ -20,12 +20,12 @@ void PrintBootSectInfo(NTFS_BootRecord _bpb) {
     printf("Sectors Per Track: %d\n", _bpb.sectorperTrack);
     printf("Number Of Heads: %d\n", _bpb.numOfHeaders);
     printf("Hidden Sectors: %d\n", _bpb.hiddenSectors);
-    printf("Total Sectors: %dl\n", _bpb.totalSectors);
+    printf("Total Sectors: %dll\n", _bpb.totalSectors);
     printf("Logical Cluster Number for the file $MFT: %dl\n", _bpb.lcnForSMFT);
     printf("Logical Cluster Number for the file $MFTMirr: %dl\n", _bpb.lcnForSMFTMirr);
     printf("Clusters Per File Record Segment: %d\n", _bpb.clusterPerFileRecordSegm);
     printf("Clusters Per Index Buffer: %d\n", _bpb.clusterPerIndexBuff);
-    printf("Volume Serial Number: %d\n", _bpb.volumeSerialNumber);
+    printf("Volume Serial Number: %dl\n", _bpb.volumeSerialNumber);
     printf("Checksum: %d\n", _bpb.checksum);
     printf("End of Sector Marker: 0x%X\n", _bpb.endMarker);
 }

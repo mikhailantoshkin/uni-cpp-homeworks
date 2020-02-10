@@ -36,7 +36,8 @@ int main()
     string SysName = FindFSName(diskName);
     if (!fsIsSupported(SysName)) {
         cout << "Sorry, " << SysName << " is not supported yet!" << endl;
-        getchar();
+        cin.get();
+        cin.get();
         exit(0);
     }
 
@@ -47,6 +48,7 @@ int main()
         PrintBootSectInfo(_bpb);
     }
     cout << "Press Enter to exit";
+    cin.get();
     cin.get();
     exit(0);
    

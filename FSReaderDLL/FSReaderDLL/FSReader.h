@@ -32,13 +32,13 @@ typedef struct
     DWORD hiddenSectors;
     DWORD notUsed2;
     DWORD notused3;
-    LONGLONG totalSectors;
-    LONGLONG lcnForSMFT;
-    LONGLONG lcnForSMFTMirr;
+    ULONGLONG totalSectors;
+    ULONGLONG lcnForSMFT;
+    ULONGLONG lcnForSMFTMirr;
     DWORD clusterPerFileRecordSegm;
     BYTE clusterPerIndexBuff;
     BYTE notUsed4[3];
-    LONGLONG volumeSerialNumber;
+    ULONGLONG volumeSerialNumber;
     DWORD checksum;
     BYTE bootstrap[426];
     WORD endMarker;
