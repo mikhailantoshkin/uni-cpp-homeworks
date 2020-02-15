@@ -1,7 +1,4 @@
-﻿// FSReader.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <windows.h>
 #include <Winioctl.h>
 #include <wchar.h>
