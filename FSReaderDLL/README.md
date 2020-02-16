@@ -1,4 +1,4 @@
-# Гайдик с комментариями для создания приложения с подключаемой кастомной DLL
+﻿# Гайдик с комментариями для создания приложения с подключаемой кастомной DLL
 
 ## Что нужно иметь
 * [Visual Studio](https://visualstudio.microsoft.com/downloads/)
@@ -6,10 +6,24 @@
 * Две руки
 
 ## Создаем проект для DLL
-1. Запускаем Visual Studio, он нас приветствует и спрашивает чего же мы хотим сделать сегодня. Мы хотим новый проект![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_1.png)
-2. В мастере создания новых проектов выбираем DLL![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_2.png)
-3. Поскольку мы опираемся на официальный [гайд с MSDN](https://docs.microsoft.com/en-us/cpp/build/walkthrough-creating-and-using-a-dynamic-link-library-cpp?view=vs-2019#create-the-dll-project), мы называем проект `MathLibrary`, настройки оставляем как на скрине, чтобы дальше не надо было извращаться с путями к файлам ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_3.png)
-4. После создания проекта добавляем заголовочный файл `MathLibrary.h` ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_4.png) ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_5.png) 
+1. Запускаем Visual Studio, он нас приветствует и спрашивает чего же мы хотим сделать сегодня. Мы хотим новый проект
+
+    ![](img/Screenshot_1.png)
+    
+2. В мастере создания новых проектов выбираем DLL
+
+    ![](img/Screenshot_2.png)
+    
+3. Поскольку мы опираемся на официальный [гайд с MSDN](https://docs.microsoft.com/en-us/cpp/build/walkthrough-creating-and-using-a-dynamic-link-library-cpp?view=vs-2019#create-the-dll-project), мы называем проект `MathLibrary`, настройки оставляем как на скрине, чтобы дальше не надо было извращаться с путями к файлам 
+
+    ![](img/Screenshot_3.png)
+
+4. После создания проекта добавляем заголовочный файл `MathLibrary.h` 
+
+    ![](img/Screenshot_4.png) 
+
+    ![](img/Screenshot_5.png) 
+    
 5. Копируем туда код 
 ```c++
 // MathLibrary.h - Contains declarations of math functions
@@ -47,7 +61,12 @@ extern "C" MATHLIBRARY_API unsigned long long fibonacci_current();
 // Get the position of the current value in the sequence.
 extern "C" MATHLIBRARY_API unsigned fibonacci_index();
 ```
-6. Теперь добавим имплементацию. Создаем новый файл `MathLibrary.cpp` и заполняем его кодом![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_6.png) ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_7.png) 
+6. Теперь добавим имплементацию. Создаем новый файл `MathLibrary.cpp` и заполняем его кодом
+
+    ![](img/Screenshot_6.png) 
+
+    ![](img/Screenshot_7.png) 
+    
 ```
 // MathLibrary.cpp : Defines the exported functions for the DLL.
 #include "pch.h" // use stdafx.h in Visual Studio 2017 and earlier
@@ -106,7 +125,13 @@ unsigned fibonacci_index()
     return index_;
 }
 ```
-7. Чтобы удостовериться, что все работает, соберем нашу DLL. Жмем **Build** > **Build Solution**![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_8.png) Если все хорошо, то увидим, что проект успешно собрался![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_9.png) 
+7. Чтобы удостовериться, что все работает, соберем нашу DLL. Жмем **Build** > **Build Solution**
+
+    ![](img/Screenshot_8.png) 
+
+    Если все хорошо, то увидим, что проект успешно собрался
+
+    ![](img/Screenshot_9.png) 
 
 ## Создаем клиентское приложение, использующее DLL
 
@@ -114,14 +139,22 @@ unsigned fibonacci_index()
 
 1. Жмакаем **File** > **New** > **Project**
 
-2. В открывшемся окне выбираем *Console App* и называем его `MathClient`, все остальное оставляем так же, как в первый раз![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_10.png)
+2. В открывшемся окне выбираем *Console App* и называем его `MathClient`, все остальное оставляем так же, как в первый раз
 
-3. Жакаем ПКМ на проект и выбираем *Properties* ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_11.png)
+    ![](img/Screenshot_10.png)
 
-4. Смотрим, что выбрано **All Configurations** и проваливаемся в **Configuration Properties** > **C/C++** > **General**, где жмакаем в **Additional Include Directories** и выбираем  **Edit** ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_12.png)
+3. Жакаем ПКМ на проект и выбираем *Properties* 
 
-5. Двойным щелчком в **Additional Include Directories** или нажатием на иконку каталога добавляем запись. Если все делали по инструкции, то добавляем туда запись `..\..\MathLibrary\MathLibrary`
+    ![](img/Screenshot_11.png)
+
+4. Смотрим, что выбрано **All Configurations** и проваливаемся в **Configuration Properties** > **C/C++** > **General**, где жмакаем в **Additional Include Directories** и выбираем  **Edit** 
+    
+    ![](img/Screenshot_12.png)
+
+5. Двойным щелчком в **Additional Include Directories** или нажатием на иконку каталога добавляем   запись. Если все делали по инструкции, то добавляем туда запись `..\..\MathLibrary\MathLibrary`
    Если нет, то ~~страдаем~~ вводим относительный путь до папки, в которой лежит DLL (можно абсолютный, но ~~это путь ламеров~~ тогда проект становиться не мобильным).
+   
+   ![](img/Screenshot_13.png)
 
 6. Заменяем код в **MathLibrary.h** на следующий 
 
@@ -146,19 +179,24 @@ unsigned fibonacci_index()
            "unsigned 64-bit integer." << std::endl;
    }
    ```
-![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_14.png)
+    ![](img/Screenshot_14.png)
 
-7. Снова открываем **Properties** проекта, проваливаемся в **Linker** > **Input** и в **Additional Dependencies** выбираем **Edit** ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_15.png)
+7. Снова открываем **Properties** проекта, проваливаемся в **Linker** > **Input** и в **Additional Dependencies** выбираем **Edit** 
+
+    ![](img/Screenshot_15.png)
 
 8. Добавляем туда *MathLibrary.lib*
-    ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_18.png)
 
-9. Теперь проваливаемся в **Linker** > **General** и в **Additional Library Directories** выбираем **Edit** ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_17.png)
+    ![](img/Screenshot_16.png)
+
+9. Теперь проваливаемся в **Linker** > **General** и в **Additional Library Directories** выбираем **Edit** ![](img/Screenshot_17.png)
 
 10. Та же история, что и раньше, двойное нажатие и указываем относительный путь `..\..\MathLibrary\$(IntDir)`
-    ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_18.png)
+    
+    ![](img/Screenshot_18.png)
 
-11.  Проваливаемся в **Build Events** > **Post-Build Event** и в **Command Line** выбираем **Edit** ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_19.png)
+11.  Проваливаемся в **Build Events** > **Post-Build Event** и в **Command Line** выбираем **Edit**     
+    ![](img/Screenshot_19.png)
 
 12. Вводим туда команду, которая будет копировать наш DLL в папку со скомпилированным .exe 
 
@@ -166,28 +204,24 @@ unsigned fibonacci_index()
     xcopy /y /d "..\..\MathLibrary\$(IntDir)MathLibrary.dll" "$(OutDir)"
     ```
 
-    ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_20.png)
+    ![](img/Screenshot_20.png)
     И убеждаемся, что в **Evaluated value** у нас что-то похожее на правду
 
-13. Жмем **Build** > **Build Solution** и ~~молимся~~ смотрим в **Output**, что наш проект успешно собрался![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_21.png)
-
+13. Жмем **Build** > **Build Solution** и ~~молимся~~ смотрим в **Output**, что наш проект успешно собрался
     
+    ![](img/Screenshot_21.png)
 
-    ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_22.png)
+    ![](img/Screenshot_22.png)
 
-14. Запускам приложение **Debug** > **Start Without Debugging** ![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_23.png)
+14. Запускам приложение **Debug** > **Start Without Debugging** ![](img/Screenshot_23.png)
 
-![](G:\Учеба\5-й курс\Хорьков\C++\FSReaderDLL\img\Screenshot_24.png)
+    ![](img/Screenshot_24.png)
 
 ???
 
 PROFIT
 
-
-
 ## Пост скриптум
-
-
 
 Как вы уже могли заметить, это в некоторых местах сжатый, а в некоторых расширенный "перевод" [гайда с MSDN](https://docs.microsoft.com/en-us/cpp/build/walkthrough-creating-and-using-a-dynamic-link-library-cpp?view=vs-2019). Если хочется со всем этим делом разобраться - лучше читать первоисточник. Но, если просто следовать этим инструкциям, а вместо кода из примера подставить свой для чтения FS, все тоже замечательно сработает. Главное, не забывайте перекомпилировать DLL, когда вносите в нее изменения ~~не будьте как я~~
 
