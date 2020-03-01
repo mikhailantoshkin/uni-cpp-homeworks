@@ -372,3 +372,5 @@ healthchecksdb
 *.out
 *.app
 *.zip
+!sqlite3.dll
+__*

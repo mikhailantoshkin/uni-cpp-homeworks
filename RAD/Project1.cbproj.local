@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.324,=C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.548,=G:\Учеба\5-й курс\Хорьков\C++\RAD\sqlite3.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.419,C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Unit1.h=G:\Учеба\5-й курс\Хорьков\C++\RAD\Unit1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.481,C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Project1PCH1.h=G:\Учеба\5-й курс\Хорьков\C++\RAD\Project1PCH1.h</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.419,C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Unit1.cpp=G:\Учеба\5-й курс\Хорьков\C++\RAD\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.966,=G:\Учеба\5-й курс\Хорьков\C++\RAD\sqlite3.c</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.442,C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Project1.cbproj=G:\Учеба\5-й курс\Хорьков\C++\RAD\Project1.cbproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.356,=C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.419,C:\Users\First AID's\Documents\Embarcadero\Studio\Projects\Unit1.dfm=G:\Учеба\5-й курс\Хорьков\C++\RAD\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
