@@ -202,7 +202,8 @@ bool __fastcall TForm1::TableIsEmpty(TObject *Sender) {
 void __fastcall TForm1::UserStringTreeRemoveFromSelection(TBaseVirtualTree *Sender,
                                                           PVirtualNode Node) {
     RemoveButton->Enabled = false;
-    InfoLabel->Caption = "";
+	InfoLabel->Caption = "";
+    InfoLabel2->Caption = "";
 }
 //---------------------------------------------------------------------------
 
