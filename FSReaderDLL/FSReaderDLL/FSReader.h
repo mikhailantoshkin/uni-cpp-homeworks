@@ -43,7 +43,27 @@ typedef struct
 } NTFS_BootRecord;
 #pragma pack()
 
-extern "C++" FSREADER_API void PrintBootSectInfo(NTFS_BootRecord _bpb);
-extern "C++" FSREADER_API std::string FindFSName(std::string diskName);
-extern "C++" FSREADER_API bool fsIsSupported(std::string SysName);
-extern "C++" FSREADER_API bool getFsInfo(std::string diskNameFormated, NTFS_BootRecord* _bpb);
+class FileSystem {
+public:
+	FileSystem() {}
+	FileSystem(const char* FSdiskName) {
+		diskName = FSdiskName;
+	}
+	virtual void readBootRecord() = 0;
+	virtual ~FileSystem() {}
+	std::string diskName;
+};
+
+
+class NTFSFileSystem : public FileSystem {
+public:
+	NTFSFileSystem() {}
+	NTFSFileSystem(const char* diskName) : FileSystem(diskName) {}
+
+	void readBootRecord() override;
+
+private:
+	NTFS_BootRecord bootRecord;
+};
+
+extern "C++" FSREADER_API FileSystem* getDiskFS(const char* diskName);

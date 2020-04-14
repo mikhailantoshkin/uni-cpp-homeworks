@@ -24,24 +24,15 @@ int main()
 		}
 	}
 
-
-	string diskNameFormated = "\\\\.\\" + diskName + ":";
-
-	string SysName = FindFSName(diskName);
-	if (!fsIsSupported(SysName))
+	try
 	{
-		cout << "Sorry, " << SysName << " is not supported yet!" << endl;
-		cin.get();
-		cin.get();
-		exit(0);
-	}
-
-
-	NTFS_BootRecord _bpb;
-	if (getFsInfo(diskNameFormated, &_bpb))
+		FileSystem* fs = getDiskFS(diskName.c_str());
+		fs->readBootRecord();
+	}catch (const char* msg)
 	{
-		PrintBootSectInfo(_bpb);
+		cerr << msg << endl;
 	}
+	
 	cout << "Press Enter to exit";
 	cin.get();
 	cin.get();
